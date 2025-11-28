@@ -237,11 +237,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Releasing
 
-# 1. Update the version in package.json
+### 1. Update the version in package.json
 npm version patch  # or minor, or major
 
-# 2. Push with tags
+### 2. Push with tags
 git push && git push --tags
 
-# 3. Create the release on GitHub
+### 3. Create the release on GitHub
 gh release create v1.0.0 --title "Release 1.0.0" --notes "Initial release"
