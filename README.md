@@ -235,12 +235,13 @@ MIT © [Guillaume Cisco]
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## Releasing
 
-# 1. Mettre à jour la version dans package.json
-npm version patch  # ou minor, ou major
+# 1. Update the version in package.json
+npm version patch  # or minor, or major
 
-# 2. Pousser avec les tags
+# 2. Push with tags
 git push && git push --tags
 
-# 3. Créer la release sur GitHub
+# 3. Create the release on GitHub
 gh release create v1.0.0 --title "Release 1.0.0" --notes "Initial release"
