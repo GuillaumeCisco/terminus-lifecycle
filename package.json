@@ -1,5 +1,8 @@
 {
-  "name": "terminus-lifecycle",
+  "name": "@guillaumecisco/terminus-lifecycle",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "description": "Kubernetes-ready lifecycle management with graceful shutdown and beacon tracking",
   "main": "dist/index.js",
