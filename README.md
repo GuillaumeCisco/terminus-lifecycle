@@ -14,13 +14,14 @@ A modern, TypeScript-first library for managing application lifecycle in Kuberne
 - 🔄 **Graceful shutdown** - Wait for in-flight operations to complete
 - 📊 **Structured logging** - Built-in pino logger with pretty printing
 - 🐳 **Kubernetes-native** - Designed for K8s readiness/liveness probes
+- 🔌 **Default instance** - Access lifecycle state from anywhere in your app
 
 ## Installation
 
 ```shell
-$> bash npm install terminus-lifecycle
+$> bash npm install @guillaumecisco/terminus-lifecycle
 # or
-$> yarn add terminus-lifecycle
+$> yarn add @guillaumecisco/terminus-lifecycle
 ```
 
 For pretty logs in development:
@@ -30,7 +31,7 @@ $> bash npm install --save-dev pino-pretty
 
 ## Quick Start
 ```typescript
-import { createLifecycleServer } from 'terminus-lifecycle'
+import { createLifecycleServer } from '@guillaumecisco/terminus-lifecycle'
 
 const lifecycle = createLifecycleServer({ 
     port: 9000,
@@ -46,11 +47,35 @@ app.listen(3000, async () => { await lifecycle.setReady(true) })
 
 ## Features
 
+### Default Lifecycle Instance
+
+The first lifecycle server created becomes the default instance, accessible from anywhere in your application:
+
+```typescript
+import { createLifecycleServer, getDefaultLifecycle } from '@guillaumecisco/terminus-lifecycle'
+
+// In your main file
+createLifecycleServer({ port: 9000 })
+
+// In any other file
+import { getDefaultLifecycle } from '@guillaumecisco/terminus-lifecycle'
+
+async function processJobs(jobs) {
+    for (const job of jobs) {
+        if (getDefaultLifecycle().isServerShuttingDown()) {
+            console.log('Shutdown detected, stopping job processing')
+            break
+        }
+        await processJob(job)
+    }
+}
+```
+
 ### Beacon Manager
 
 Track ongoing operations to ensure graceful shutdown:
 ```typescript
-import { beaconManager } from 'terminus-lifecycle'
+import { beaconManager } from '@guillaumecisco/terminus-lifecycle'
 
 async function processJob(job) {
     const beacon = beaconManager.createBeacon({ name: 'processJob', jobId: job.id })
@@ -65,7 +90,7 @@ async function processJob(job) {
 
 ### Custom Logger
 ```typescript
-import { createLifecycleServer, createLogger } from 'terminus-lifecycle'
+import { createLifecycleServer, createLogger } from '@guillaumecisco/terminus-lifecycle'
 
 const logger = createLogger({ 
     level: 'debug',
@@ -84,26 +109,10 @@ const lifecycle = createLifecycleServer({
 
 The lifecycle server automatically creates three endpoints:
 
+- **`GET /`** - Simple OK response
 - **`GET /health`** - Overall health (ready and not shutting down)
 - **`GET /live`** - Liveness probe (not shutting down)
 - **`GET /ready`** - Readiness probe (initialization complete and not shutting down)
-
-### Checking Shutdown State
-```typescript
-import { createLifecycleServer } from 'terminus-lifecycle'
-
-const lifecycle = createLifecycleServer({ port: 9000 })
-// In your job processing loop
-async function processJobs(jobs) {
-    for (const job of jobs) {
-        if (lifecycle.isServerShuttingDown()) { 
-            console.log('Shutdown detected, stopping job processing')
-            break
-        } 
-        await processJob(job) 
-    } 
-}
-``` 
 
 ## API
 
@@ -126,7 +135,23 @@ Creates and initializes a lifecycle server.
 
 **Returns:** `LifecycleServer` instance
 
-**Methods:**
+### `getDefaultLifecycle()`
+
+Returns the default lifecycle server instance (the first one created).
+
+**Throws:** Error if no lifecycle server has been created yet.
+
+**Example:**
+```typescript
+import { getDefaultLifecycle } from '@guillaumecisco/terminus-lifecycle'
+
+if (getDefaultLifecycle().isServerShuttingDown()) {
+    // Stop accepting new work
+}
+```
+
+### `LifecycleServer` Methods
+
 - `setReady(value: boolean)` - Mark server as ready/not ready
 - `getReady()` - Check if server is ready
 - `isServerShuttingDown()` - Check if shutdown has started
@@ -187,7 +212,7 @@ spec:
 ## Complete Example
 ```typescript
 import express from 'express'
-import { createLifecycleServer, createLogger, beaconManager } from 'terminus-lifecycle'
+import { createLifecycleServer, createLogger, beaconManager } from '@guillaumecisco/terminus-lifecycle'
 
 const logger = createLogger({ level: 'info' })
 const app = express()
@@ -240,10 +265,16 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Releasing
 
 ### 1. Update the version in package.json
-npm version patch  # or minor, or major
+```shell
+$> npm version patch  # or minor, or major
+```
 
 ### 2. Push with tags
-git push && git push --tags
+```shell
+$> git push && git push --tags
+```
 
 ### 3. Create the release on GitHub
-gh release create v1.0.0 --title "Release 1.0.0" --notes "Initial release"
+```shell
+$> gh release create v1.0.0 --title "Release 1.0.0" --notes "Initial release"
+```
