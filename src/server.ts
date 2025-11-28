@@ -172,10 +172,25 @@ export class LifecycleServer {
     }
 }
 
-// Factory function for the desired API
+// Singleton
+let defaultInstance: LifecycleServer | null = null
+
+export function getDefaultLifecycle(): LifecycleServer {
+    if (!defaultInstance) {
+        throw new Error('No default lifecycle instance. Create one with createLifecycleServer first.')
+    }
+    return defaultInstance
+}
+
 export function createLifecycleServer(config: LifecycleConfig): LifecycleServer {
     const lifecycle = new LifecycleServer(config.logger)
     lifecycle.init(config)
+
+    // Set as default if not already set
+    if (!defaultInstance) {
+        defaultInstance = lifecycle
+    }
+
     return lifecycle
 }
 
