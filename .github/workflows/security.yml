@@ -1,18 +1,24 @@
-# .github/workflows/security.yml
 name: Security Audit
 
 on:
-  schedule:
-    - cron: '0 0 * * 1' # Tous les lundis
   push:
-    branches: [master]
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+  schedule:
+    - cron: '0 0 * * 0' # Weekly on Sunday at midnight
 
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - run: npm audit --audit-level=moderate
+
+      - name: Run security audit
+        run: npm audit --audit-level=moderate
