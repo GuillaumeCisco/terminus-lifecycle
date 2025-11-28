@@ -1,0 +1,65 @@
+{
+  "name": "terminus-lifecycle",
+  "version": "1.0.0",
+  "description": "Kubernetes-ready lifecycle management with graceful shutdown and beacon tracking",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "keywords": [
+    "kubernetes",
+    "graceful-shutdown",
+    "lifecycle",
+    "terminus",
+    "health-check",
+    "readiness",
+    "liveness",
+    "beacon",
+    "shutdown"
+  ],
+  "author": "Guillaume Cisco <guillaumecisco@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guillaumecisco/terminus-lifecycle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guillaumecisco/terminus-lifecycle/issues"
+  },
+  "homepage": "https://github.com/guillaumecisco/terminus-lifecycle#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@godaddy/terminus": "4.12.1",
+    "express": "4.21.2",
+    "pino": "9.5.0"
+  },
+  "peerDependencies": {
+    "pino-pretty": "11.0.0"
+  },
+  "peerDependenciesMeta": {
+    "pino-pretty": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/express": "4.17.21",
+    "@types/node": "20.11.19",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint": "8.57.1",
+    "prettier": "3.2.5",
+    "typescript": "5.9.3"
+  }
+}
