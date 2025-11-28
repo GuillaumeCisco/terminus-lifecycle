@@ -19,14 +19,14 @@ A modern, TypeScript-first library for managing application lifecycle in Kuberne
 ## Installation
 
 ```shell
-$> bash npm install @guillaumecisco/terminus-lifecycle
+$> npm install @guillaumecisco/terminus-lifecycle
 # or
 $> yarn add @guillaumecisco/terminus-lifecycle
 ```
 
 For pretty logs in development:
 ```shell
-$> bash npm install --save-dev pino-pretty
+$> npm install --save-dev pino-pretty
 ``` 
 
 ## Quick Start
