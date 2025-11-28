@@ -2,7 +2,7 @@
 
 > Kubernetes-ready lifecycle management with graceful shutdown and beacon tracking
 
-[![npm version](https://badge.fury.io/js/terminus-lifecycle.svg)](https://www.npmjs.com/package/terminus-lifecycle)
+[![npm version](https://badge.fury.io/js/terminus-lifecycle.svg)](https://www.npmjs.com/package/@guillaumecisco/terminus-lifecycle)
 [![CI](https://github.com/GuillaumeCisco/terminus-lifecycle/workflows/CI/badge.svg)](https://github.com/GuillaumeCisco/terminus-lifecycle/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Downloads](https://img.shields.io/npm/dm/terminus-lifecycle.svg)](https://www.npmjs.com/package/@guillaumecisco/terminus-lifecycle)
