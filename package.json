@@ -34,12 +34,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guillaumecisco/terminus-lifecycle.git"
+    "url": "https://github.com/GuillaumeCisco/terminus-lifecycle.git"
   },
   "bugs": {
-    "url": "https://github.com/guillaumecisco/terminus-lifecycle/issues"
+    "url": "https://github.com/GuillaumeCisco/terminus-lifecycle/issues"
   },
-  "homepage": "https://github.com/guillaumecisco/terminus-lifecycle#readme",
+  "homepage": "https://github.com/GuillaumeCisco/terminus-lifecycle#readme",
   "engines": {
     "node": ">=18.0.0"
   },
