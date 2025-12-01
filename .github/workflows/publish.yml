@@ -5,7 +5,7 @@ on:
     types: [created]
 
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write
   contents: read
 
 jobs:
@@ -14,20 +14,20 @@ jobs:
     permissions:
       contents: read
       id-token: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (20.x with npm 11+)
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          check-latest: true
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
 
-      # Ensure npm 11.5.1 or later is installed
-      - name: Update npm
-        run: npm install -g npm@latest
+      # Surtout pas de "npm install -g npm@latest" ici
 
       - name: Install dependencies
         run: npm ci
