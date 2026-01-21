@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Kubernetes-ready lifecycle management with graceful shutdown and beacon tracking",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
