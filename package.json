@@ -46,7 +46,7 @@
   "dependencies": {
     "@godaddy/terminus": "4.12.1",
     "express": "5.2.1",
-    "pino": "10.1.0"
+    "pino": "10.3.1"
   },
   "peerDependencies": {
     "pino-pretty": "11.0.0"
@@ -57,14 +57,14 @@
     }
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/eslintrc": "3.3.4",
     "@eslint/js": "9.39.2",
     "@types/express": "5.0.6",
-    "@types/node": "25.0.3",
-    "@typescript-eslint/eslint-plugin": "8.50.0",
-    "@typescript-eslint/parser": "8.50.0",
+    "@types/node": "25.3.3",
+    "@typescript-eslint/eslint-plugin": "8.56.1",
+    "@typescript-eslint/parser": "8.56.1",
     "eslint": "9.39.2",
-    "prettier": "3.7.4",
+    "prettier": "3.8.1",
     "typescript": "5.9.3"
   }
 }
